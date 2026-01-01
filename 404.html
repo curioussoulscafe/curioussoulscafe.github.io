@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting...</title>
+  
+  <script>
+    // 1. Define your new domain
+    var newDomain = "https://app.curioussouls.cafe";
+
+    // 2. Define specific path mappings here
+    // "Old Path from GitHub" : "New Path on App"
+    var redirectMap = {
+      "/about": "/about",
+      "/meetup-hk": "/events/hong-kong",
+      "/meetup-seoul": "/events/seoul",
+      "/shoshin": "/topics/shoshin-beginners-mind"
+    };
+
+    // 3. Logic to handle the redirect
+    var currentPath = window.location.pathname;
+    
+    // Remove trailing slash for consistent matching (e.g., /about/ -> /about)
+    if (currentPath.endsWith('/') && currentPath.length > 1) {
+      currentPath = currentPath.slice(0, -1);
+    }
+
+    if (redirectMap[currentPath]) {
+      // If we found a specific match in the map, go there
+      window.location.replace(newDomain + redirectMap[currentPath]);
+    } else {
+      // OPTION A: Redirect unknown paths to the new Homepage
+      window.location.replace(newDomain);
+      
+      // OPTION B: Attempt to keep the same path structure on the new site
+      // If your new site uses the exact same URL structure, uncomment the line below instead:
+      // window.location.replace(newDomain + currentPath);
+    }
+  </script>
+
+  <meta http-equiv="refresh" content="0; url=https://app.curioussouls.cafe/" />
+</head>
+<body>
+  <h1>Page Moved</h1>
+  <p>The content you are looking for has moved to our new home.</p>
+  <p><a href="https://app.curioussouls.cafe/">Click here to visit app.curioussouls.cafe</a></p>
+</body>
+</html>
